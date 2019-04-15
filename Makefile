@@ -26,4 +26,5 @@ metalint:
 
 .PHONY: release
 release:
-		ci/prepare-release
+	echo "set GITHUB_TOKEN to a personal access token that has repo:read permission to run the release task"
+	ci/prepare-release
