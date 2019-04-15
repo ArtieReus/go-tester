@@ -2,21 +2,23 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/shirou/gopsutil/host"
 	"github.com/shirou/gopsutil/mem"
-	// "github.com/shirou/gopsutil/host"
-	// "github.com/shirou/gopsutil/mem"
 )
 
 func main() {
-	mem, _ := mem.VirtualMemory()
+	mem, err := mem.VirtualMemory()
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", mem.Total, mem.Free, mem.UsedPercent)
 	fmt.Println(mem)
 
 	info, err := host.Info()
 	if err != nil {
-		fmt.Printf("error %v", err)
+		log.Fatalf("error %v", err)
 	}
 	empty := &host.InfoStat{}
 	if info == empty {

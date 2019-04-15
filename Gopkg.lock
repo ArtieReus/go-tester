@@ -21,16 +21,27 @@
   version = "v1.2.4"
 
 [[projects]]
-  digest = "1:e85bfe279db3f72e8f38f7141690ecfd51afbc7065e4a0fe9252fc9870cc39ff"
+  digest = "1:2ac9271e469441ccbb11ad54775f6e627ff61028888f51fcb4687a5c4999cda8"
   name = "github.com/shirou/gopsutil"
   packages = [
+    "cpu",
     "host",
     "internal/common",
+    "mem",
+    "net",
     "process",
   ]
   pruneopts = "UT"
   revision = "2cbc9195c892b304060269ef280375236d2fcac9"
   version = "v2.19.03"
+
+[[projects]]
+  branch = "master"
+  digest = "1:99c6a6dab47067c9b898e8c8b13d130c6ab4ffbcc4b7cc6236c2cd0b1e344f5b"
+  name = "github.com/shirou/w32"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "bb4de0191aa41b5507caa14b0650cdbddcd9280b"
 
 [[projects]]
   branch = "master"
@@ -46,6 +57,9 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/shirou/gopsutil/host"]
+  input-imports = [
+    "github.com/shirou/gopsutil/host",
+    "github.com/shirou/gopsutil/mem",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
