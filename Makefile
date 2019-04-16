@@ -25,7 +25,8 @@ build:
 	@mkdir -p $(BUILD_DIR)
 	go build -o $(BINARY) -ldflags="$(LDFLAGS)" $(PKG_NAME)
 # 	go build -o $(BINARY)_linux -ldflags="$(LDFLAGS)" $(PKG_NAME)
-# 	GOOS=windows GOARCH=amd64 go build -o $(BINARY)_windows.exe -ldflags="$(LDFLAGS)" $(PKG_NAME)
+	GOOS=windows GOARCH=amd64 go build -o $(BINARY)_windows_amd64.exe -ldflags="$(LDFLAGS)" $(PKG_NAME)
+	GOOS=darwin GOARCH=amd64 go build -o $(BINARY)_linux_amd64 -ldflags="$(LDFLAGS)" $(PKG_NAME)
 
 .PHONY: build-image
 build-image:
