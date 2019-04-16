@@ -24,7 +24,6 @@ help:
 build:
 	@mkdir -p $(BUILD_DIR)
 	go build -o $(BINARY) -ldflags="$(LDFLAGS)" $(PKG_NAME)
-# 	go build -o $(BINARY)_linux -ldflags="$(LDFLAGS)" $(PKG_NAME)
 	GOOS=windows GOARCH=amd64 go build -o $(BINARY)_windows_amd64.exe -ldflags="$(LDFLAGS)" $(PKG_NAME)
 	GOOS=linux GOARCH=amd64 go build -o $(BINARY)_linux_amd64 -ldflags="$(LDFLAGS)" $(PKG_NAME)
 
@@ -40,18 +39,3 @@ metalint:
 release:
 	echo "set GITHUB_TOKEN to a personal access token that has repo:read permission to run the release task"
 	ci/prepare-release
-
-.PHONY: cross
-cross:
-	@# -w omit DWARF symbol table -> smaller
-	@# -s stip binary
-	docker run \
-		--rm \
-		-v $(CURDIR):/go/src/$(PKG_NAME) \
-		-w /go/src/$(PKG_NAME) \
-		$(BUILD_IMAGE) \
-		make cross-compile TARGETS="$(TARGETS)" BUILD_VERSION=$(BUILD_VERSION)
-
-.PHONY: cross-compile
-cross-compile:
-	gox -osarch="$(TARGETS)" -output="bin/$(GO_TESTER_BIN_TPL)" -ldflags="$(LDFLAGS)" $(PKG_NAME)
