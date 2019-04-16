@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Starting getting memory info...")
 	mem, err := mem.VirtualMemory()
 	if err != nil {
 		log.Fatal(err)
@@ -16,6 +17,7 @@ func main() {
 	fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", mem.Total, mem.Free, mem.UsedPercent)
 	fmt.Println(mem)
 
+	fmt.Println("Starting getting host info...")
 	info, err := host.Info()
 	if err != nil {
 		log.Fatalf("error %v", err)
