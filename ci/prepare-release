@@ -4,7 +4,7 @@ set -e -x
 
 mkdir -p release;
 
-version="1.0.0"
+version="1.0.2"
 echo "v$version" > release/name
 echo "v$version" > release/tag
 git -C . rev-parse HEAD > release/commitish
@@ -15,7 +15,7 @@ EOF
 
 mkdir -p release/artifacts
 cp bin/go-tester_* release/artifacts/
-upx release/artifacts/go-tester_windows.exe
-upx release/artifacts/go-tester_linux
+upx release/artifacts/go-tester_windows_amd64.exe
+upx release/artifacts/go-tester_linux_amd64
 
-hub release create -a release/artifacts/go-tester_windows.exe -a release/artifacts/go-tester_linux -F release/body -t $(cat release/commitish) $(cat release/tag)
+hub release create -a release/artifacts/go-tester_windows_amd64.exe -a release/artifacts/go-tester_linux_amd64 -F release/body -t $(cat release/commitish) $(cat release/tag)
