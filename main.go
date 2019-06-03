@@ -29,5 +29,15 @@ func main() {
 	if info.Procs == 0 {
 		fmt.Println("Could not determine the number of host processes")
 	}
-	fmt.Printf("%+v\n", info)
+
+	facts := make(map[string]interface{})
+	facts["os"] = info.OS
+	facts["platform"] = info.Platform
+	facts["platform_family"] = info.PlatformFamily
+	facts["platform_version"] = info.PlatformVersion
+	facts["fqdn"] = nil
+	facts["domain"] = nil
+	facts["hostname"] = info.Hostname
+
+	fmt.Printf("%+v\n", facts)
 }
